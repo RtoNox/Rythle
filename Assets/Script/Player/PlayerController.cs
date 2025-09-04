@@ -15,6 +15,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckY = 0.2f;
     [SerializeField] private float groundCheckX = 0.5f;
     [SerializeField] private LayerMask whatisGround;
+    public static PlayerController Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
@@ -25,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         getInputs();
         jump();
+        flip();
     }
 
     void FixedUpdate()
@@ -35,6 +49,18 @@ public class PlayerController : MonoBehaviour
     void getInputs()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
+    }
+
+    void flip()
+    {
+        if (xAxis < 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+        }
+        else if (xAxis > 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+        }
     }
 
     private void move()
@@ -52,6 +78,10 @@ public class PlayerController : MonoBehaviour
 
     void jump()
     {
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
         if (Input.GetButtonDown("Jump") && Grounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
