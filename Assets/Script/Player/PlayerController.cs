@@ -199,7 +199,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (isWallSticking && AbilityManager.Instance.IsAbilityUnlocked("WallStick"))
             {
-                rb.velocity = new Vector2(-facingDirection * walkSpeed * 1.2f, jumpForce);
+                
+                rb.velocity = new Vector2(-1 * facingDirection * walkSpeed * 1.2f, jumpForce);
                 isWallSticking = false;
                 wallStickTimer = 0f;
                 isDiving = false;
@@ -381,15 +382,15 @@ public class PlayerController : MonoBehaviour
     }
     
     // Visual debug
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.right * facingDirection * wallCheckDistance));
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawLine(transform.position, transform.position + (Vector3.right * facingDirection * wallCheckDistance));
         
-        if (isInWater)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(transform.position, new Vector3(0.8f, 0.8f, 0));
-        }
-    }
+    //     if (isInWater)
+    //     {
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawWireCube(transform.position, new Vector3(0.8f, 0.8f, 0));
+    //     }
+    // }
 }
