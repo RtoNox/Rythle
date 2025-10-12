@@ -281,9 +281,9 @@ MonoBehaviour:
   wallStickTime: 0.5
   wallCheckDistance: 0.6
   waterSurfaceSpeed: 2
-  underwaterSpeed: 10
+  underwaterSpeed: 30
   buoyancyForce: 15
-  waterDrag: 8
+  waterDrag: 150
   whatIsWater:
     serializedVersion: 2
     m_Bits: 16
